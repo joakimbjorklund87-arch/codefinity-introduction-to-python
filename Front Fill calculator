@@ -1,0 +1,26 @@
+#FF Calculator (2D)
+
+#INPUTS
+
+import math
+
+
+stage_width = float(input("What is the width of the stage? (in meters): "))
+speaker_coverage = float(input("What is the coverage of the speaker? (in degrees): "))
+audience_distance = float(input("What is the distance to the audience? (in meters): "))
+
+#Speaker coverage and distance calculation
+speaker_width = 2 * audience_distance * (math.tan(math.radians(speaker_coverage / 2)))
+
+amount_of_speakers = math.ceil(stage_width / speaker_width)
+
+#ANSWERS
+#Minimun amount of speakers needed
+#Distance between speakers
+
+
+print("You need a minimum of", int(amount_of_speakers), "speakers")
+# Calculate spacing between speaker centers (evenly across the stage)
+spacing_between = stage_width / amount_of_speakers
+
+print(f"Place the speakers approximately {spacing_between:.2f} meters apart (center-to-center).")20

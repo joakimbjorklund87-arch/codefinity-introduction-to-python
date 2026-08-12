@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Front Fill Calculator (Flask)</title>
+    <link rel="stylesheet" href="/static/styles.css">
+  </head>
+  <body>
+    <main>
+      <h1>Front Fill Calculator</h1>
+
+      <form id="calc-form" class="form-grid" onsubmit="event.preventDefault(); submitForm();" novalidate>
+        <div class="field">
+          <label for="stage_width">Stage width (m)</label>
+          <input id="stage_width" name="stage_width" type="number" step="0.01" value="{{ defaults.stage_width }}" required aria-describedby="stage-help">
+          <small id="stage-help">Total usable width on the front edge of the stage.</small>
+          <div class="field-error" id="err-stage"></div>
+        </div>
+
+        <div class="field">
+          <label for="speaker_coverage">Speaker coverage (°)</label>
+          <input id="speaker_coverage" name="speaker_coverage" type="number" step="0.1" value="{{ defaults.speaker_coverage }}" required aria-describedby="cov-help">
+          <small id="cov-help">Angular coverage of one speaker at audience area.</small>
+          <div class="field-error" id="err-cov"></div>
+        </div>
+
+        <div class="field">
+          <label for="audience_distance">Audience distance (m)</label>
+          <input id="audience_distance" name="audience_distance" type="number" step="0.01" value="{{ defaults.audience_distance }}" required aria-describedby="dist-help">
+          <small id="dist-help">Distance from speaker to audience (approx.).</small>
+          <div class="field-error" id="err-dist"></div>
+        </div>
+
+        <div class="actions">
+          <button type="submit" id="calc-btn">Calculate</button>
+          <button type="button" id="reset-btn" onclick="resetForm()">Reset</button>
+        </div>
+      </form>
+
+      <section id="results" class="results-card" aria-live="polite">
+        <div class="loading" id="loading" hidden>Calculating…</div>
+        <div class="result-item" id="min-speakers"></div>
+        <div class="result-item" id="center-spacing"></div>
+        <div class="result-item" id="edge-spacing"></div>
+        <div class="notes" id="notes"></div>
+      </section>
+
+      <section id="visualization-area">
+        <h2>Visualisation</h2>
+        <div class="viz-wrap">
+          <svg id="viz" viewBox="0 0 760 340" width="100%" height="260" role="img" aria-label="Stage speaker layout"></svg>
+        </div>
+        <div class="legend">
+          <span class="legend-swatch swatch-coverage"></span> Coverage area
+          <span class="legend-swatch swatch-speaker"></span> Speaker position
+        </div>
+      </section>
+
+    <script src="/static/script.js"></script>
+    </main>
+  </body>
+</html>
